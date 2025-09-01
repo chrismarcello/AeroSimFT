@@ -1,0 +1,25 @@
+﻿@page "/flownflights"
+
+<h3>Flown Flights</h3>
+
+<FluentStack Orientation="Orientation.Vertical" VerticalGap="20">
+    <div>
+        <FluentPaginator State="@pagination" SummaryTemplate="@template" />
+        <FluentDataGrid Items="@Items" Pagination="@pagination" AutoFit="true" MultiLine="true">
+            <PropertyColumn Property="@(p => p.DateFlown)" Format="yyyy-MM-dd" Sortable="true" />
+            <PropertyColumn Property="@(p => p.AircraftName)" Sortable="true" />
+            <PropertyColumn Property="@(p => p.DepartAirport)" Title="Departure Airport" Sortable="true" />
+            <PropertyColumn Property="@(p => p.DepartAirportArea)" Title="Departure Area" Sortable="true" />
+            <PropertyColumn Property="@(p => p.ArrivalAirport)" Title="Arrival Airport" Sortable="true" />
+            <PropertyColumn Property="@(p => p.ArrivalAirportArea)" Title="Arrival Area" Sortable="true" />
+            <PropertyColumn Property="@(p => p.Distance)" Title="Distance(NM)" Sortable="true" />
+            <PropertyColumn Property="@(p => p.EstFlightTime)" Title="Est. Time" Sortable="true" />
+            <PropertyColumn Property="@(p => p.Crashed)" Title="Crash" />
+        </FluentDataGrid>
+        <FluentPaginator State="@pagination" />
+    </div>
+</FluentStack>
+
+@code {
+    private RenderFragment template = @<span />;
+}

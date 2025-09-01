@@ -1,0 +1,45 @@
+﻿@page "/airportdetails/{Id:int}"
+
+<FluentStack Orientation="Orientation.Horizontal" HorizontalGap="40" HorizontalAlignment="HorizontalAlignment.Left" VerticalAlignment="VerticalAlignment.Top" Width="98%">
+    <div style="width:48%;">
+
+        @if (airportDetails is not null)
+        {
+            <FluentCard>
+                <FluentStack Orientation="Orientation.Vertical" VerticalGap="10" Padding="10">
+                    @foreach (var detail in airportDetails)
+                    {
+                        <div>
+                            <h3>@detail.AirportName (@detail.Ident)</h3>
+                            <p><strong>Type:</strong> @detail.Type.AirportTypeTitle</p>
+                            <p><strong>Location:</strong> @detail.Municipality, @detail.Region.RegionName, @detail.Country.Name</p>
+                            <p><strong>Coordinates:</strong> Lat: @detail.LatitudeDeg, Lon: @detail.LongitudeDeg</p>
+                            <p><strong>Elevation:</strong> @detail.ElevationFt ft</p>
+                            <p><strong>Scheduled Services:</strong> @detail.ScheduledService</p>
+                            <p><strong>Runways:</strong></p>
+
+                        </div>
+                        <hr />
+                    }
+
+                </FluentStack>
+            </FluentCard>
+        }
+        else
+        {
+            <p>Loading airport details...</p>
+        }
+    </div>
+    <div style="width:48%;">
+
+        @if (airportDetails is not null)
+        {
+
+            <RealTimeMap @ref="realTimeMap" OnAfterMapLoaded="AddMarker" height="calc(100vh - 6rem)" width="calc(100vw - 18rem)"></RealTimeMap>
+        }
+        else
+        {
+            <p>Loading map...</p>
+        }
+    </div>
+</FluentStack>

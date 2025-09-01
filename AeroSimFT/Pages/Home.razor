@@ -1,0 +1,106 @@
+﻿@page "/"
+@inject NavigationManager navigationManager
+
+<FluentStack Orientation="Orientation.Vertical" VerticalGap="20" HorizontalAlignment="HorizontalAlignment.Left" VerticalAlignment="VerticalAlignment.Top">
+    <div style="overflow:hidden;">
+        <h1>Hello, here are you're flights!</h1>
+        <FluentPaginator State="@pagination" SummaryTemplate="@template" />
+
+        <FluentDataGrid @ref="grid" Items="@FileteredItems" Pagination="@pagination" AutoFit="true" MultiLine="true" TGridItem="SavedFlights">
+            <SelectColumn TGridItem="SavedFlights"
+                          SelectMode="DataGridSelectMode.Single"
+                          SelectFromEntireRow="true"
+                          Property="@(e => e.Selected)"
+                          OnSelect="@ViewDetails" />
+
+            <PropertyColumn Property="@(p => p.DateCreate)" Format="yyyy-MM-dd" Sortable="true" Tooltip="true" />
+            <PropertyColumn Property="@(p => p.AircraftName)" Sortable="true" Tooltip="true">
+                <ColumnOptions>
+                    <div class="search-box">
+                        <FluentSearch AutoComplete="true" @bind-Value="aircraftFilter" Placeholder="Filter Aircraft..." @oninput="HandleAircraftFilter"
+                                      @onkeydown="HandleCloseFilterAsync" @bind-Value:after="HandleClearFilter" Label="Aircraft Filter:" />
+                    </div>
+                </ColumnOptions>
+            </PropertyColumn>
+            <PropertyColumn Property="@(p => p.DepartAirport)" Title="Departure Airport" Sortable="true" Tooltip="true" />
+            <PropertyColumn Property="@(p => p.DepartAirportArea)" Title="Departure Area" Sortable="true" Tooltip="true" />
+            <PropertyColumn Property="@(p => p.ArrivalAirport)" Title="Arrival Airport" Sortable="true" Tooltip="true" />
+            <PropertyColumn Property="@(p => p.ArrivalAirportArea)" Title="Arrival Area" Sortable="true" Tooltip="true" />
+            <PropertyColumn Property="@(p => p.Distance)" Title="Distance(NM)" Sortable="true" Tooltip="true" />
+            <PropertyColumn Property="@(p => p.EstFlightTime)" Title="Est. Time" Sortable="true" Tooltip="true" />
+        </FluentDataGrid>
+
+        <FluentPaginator State="@pagination" />
+    </div>
+    @if (details?.Count > 0)
+    {
+        <div style="width:100%; overflow:hidden;">
+            <h4>Flight Details</h4><br />
+            <FluentGrid Spacing="3" Justify="JustifyContent.SpaceBetween">
+                <FluentGridItem sm="4">
+                    <FluentCard>
+                        <ul>
+                            @foreach (var f in details)
+                            {
+                                <li><strong>Aircraft:</strong> @f.AircraftName</li>
+                                <li><strong>Departure Airport:</strong> @f.DepartAirport</li>
+                                <li>@f.DepartAirportArea</li>
+                            }
+                        </ul>
+                    </FluentCard>
+                </FluentGridItem>
+                <FluentGridItem sm="4">
+                    <FluentCard>
+                        <ul>
+                            @foreach (var f in details)
+                            {
+                                <li><strong>Arrival Airport:</strong> @f.ArrivalAirport</li>
+                                <li>@f.ArrivalAirportArea</li>
+                                <li><strong>Distance:</strong> @f.Distance NM</li>
+                                <li><strong>Estimated Flight Time:</strong> @f.EstFlightTime</li>
+                            }
+                        </ul>
+                    </FluentCard>
+                </FluentGridItem>
+                <FluentGridItem sm="4">
+                    <FluentCard>
+                        <FluentStack VerticalAlignment="VerticalAlignment.Center">
+                            <br />
+                            <FluentButton IconStart="@(new Icons.Regular.Size16.AirplaneLanding())" OnClick="() => MarkAsFlown(x.FlightId)" Appearance="Appearance.Accent">
+                                Mark as Flown
+                            </FluentButton>
+                            <FluentButton IconStart="@(new Icons.Regular.Size16.Globe())" OnClick="() => MarkCrashed(x.FlightId)"
+                                          Appearance="Appearance.Accent">
+                                Mark as Crashed
+                            </FluentButton>
+                            <FluentButton IconEnd="@(new Icons.Regular.Size16.Delete())" Appearance="Appearance.Accent" OnClick="() => DeleteSavedFlight(x.FlightId)">
+                                Delete
+                            </FluentButton>
+
+                        </FluentStack>
+                    </FluentCard>
+                </FluentGridItem>
+            </FluentGrid>
+
+        </div>
+    }
+</FluentStack>
+
+
+
+
+@code {
+
+    FluentDataGrid<SavedFlights>? grid;
+    PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
+    bool UseSelectedItems = true;
+    bool SelectFromEntireRow = true;
+    DataGridSelectMode Mode = DataGridSelectMode.Single;
+    string message = string.Empty;
+    string aircraftFilter = string.Empty;
+    Int32 id;
+
+
+    private RenderFragment template = @<span />;
+}
+

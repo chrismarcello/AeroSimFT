@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace AeroSimFT.EFModels;
+
+public partial class Airport
+{
+    public int AirportId { get; set; }
+
+    public string? Ident { get; set; }
+
+    public int TypeId { get; set; }
+
+    public string? AirportName { get; set; }
+
+    public double? LatitudeDeg { get; set; }
+
+    public double? LongitudeDeg { get; set; }
+
+    public int? ElevationFt { get; set; }
+
+    public string? Continent { get; set; }
+
+    public int CountryId { get; set; }
+
+    public int RegionId { get; set; }
+
+    public string? Municipality { get; set; }
+
+    public string? ScheduledService { get; set; }
+
+    public string? GpsCode { get; set; }
+
+    public string? IataCode { get; set; }
+
+    public string? LocalCode { get; set; }
+
+    public string? HomeLink { get; set; }
+
+    public string? WikipediaLink { get; set; }
+
+    public string? Keywords { get; set; }
+
+    public virtual ICollection<AirportFrequency> AirportFrequencies { get; set; } = new List<AirportFrequency>();
+
+    public virtual Country Country { get; set; } = null!;
+
+    public virtual Region Region { get; set; } = null!;
+
+    public virtual ICollection<Runway> Runways { get; set; } = new List<Runway>();
+
+    public virtual AirportType Type { get; set; } = null!;
+}

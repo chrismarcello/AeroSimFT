@@ -1,17 +1,18 @@
-﻿using AeroSimFT.Services;
-using AeroSimFT.Views;
+﻿using System;
+using System.Collections.Generic;
+using AeroSimFT.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.FluentUI.AspNetCore.Components;
 using System.Windows;
 
-namespace AeroSimFT
+namespace AeroSimFT.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AirportWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AirportWindow : Window
     {
-        public MainWindow()
+        public AirportWindow()
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddWpfBlazorWebView();
@@ -22,12 +23,7 @@ namespace AeroSimFT
             Resources.Add("services", serviceCollection.BuildServiceProvider());
 
             InitializeComponent();
-
-            AppState.MainWindow = this;
-        }
-        public void CloseApp_Btn()
-        {
-            Application.Current.Shutdown();
+            AppState.AirportWindow = this;
         }
         internal void MaximizeButton_Click()
         {
@@ -44,19 +40,10 @@ namespace AeroSimFT
         {
             this.WindowState = WindowState.Minimized;
         }
-        internal void OpenAirportWindow_Click()
+        public void CloseApp_Btn()
         {
-            if (AppState.AirportWindow == null)
-            {
-                AppState.AirportWindow = new AirportWindow();
-                AppState.AirportWindow.Show();
-
-                AppState.AirportWindow.Closed += (s, args) => AppState.AirportWindow = null!;
-            }
-            else
-            {
-                AppState.AirportWindow.Activate();
-            }
+            AppState.AirportWindow = null;
+            this.Close();
         }
     }
 }

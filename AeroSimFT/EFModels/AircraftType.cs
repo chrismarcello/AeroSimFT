@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace AeroSimFT.EFModels;
+
+public partial class AircraftType
+{
+    public string AircraftTypeId { get; set; } = null!;
+
+    public string? AircraftFamily { get; set; }
+
+    public string? EngineModels { get; set; }
+
+    public string? PropertyValues { get; set; }
+
+    public string? AircratfTypeName { get; set; }
+
+    public string? Tags { get; set; }
+
+    public string? Url { get; set; }
+
+    public string? IataCode { get; set; }
+
+    public int? EngineCount { get; set; }
+
+    public string? NativeName { get; set; }
+
+    public string? IcaoCode { get; set; }
+
+    public string? EngineFamily { get; set; }
+
+    public string? Manufacturer { get; set; }
+
+    public virtual ICollection<AircraftModel> AircraftModels { get; set; } = new List<AircraftModel>();
+
+    public virtual AircraftManufacturer? ManufacturerNavigation { get; set; }
+}

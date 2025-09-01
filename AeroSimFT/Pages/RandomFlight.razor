@@ -1,0 +1,124 @@
+﻿@page "/randomflight"
+@inject NavigationManager navigationManager
+
+<h3>RandomFlight</h3>
+<FluentStack Orientation="Orientation.Vertical" Style="width:100%;">
+
+    <div style="width:100%;">
+        <EditForm Model="@obj" OnValidSubmit="@GenerateNewFlight">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="XpId" class="form-control">
+                        Aircraft
+                        <InputSelect id="XpId" @bind-Value="@obj.XpId" class="form-control">
+                            <option value="1" selected>Select Aircraft</option>
+                            @foreach (var a in xpList!)
+                            {
+                                <option value="@a.AcId">@a.XPName</option>
+                            }
+                        </InputSelect>
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <label for="AirportType" class="form-control">
+                        Airport Type
+                        <InputSelect id="AirportType" @bind-Value="@obj.AirportType" class="form-control">
+                            <option value="0" selected>Select Airport Type</option>
+                            @foreach (var t in airportTypeList!)
+                            {
+                                <option value="@t.TypeId">@t.AirportTypeName</option>
+                            }
+                        </InputSelect>
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <label for="DepartIdent" class="form-control">
+                        Departure Airport Ident
+                        <InputText id="DepartIdent" class="form-control" @bind-Value="@obj.DepartIdent" />
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="Continent" class="form-control">
+                        Continent
+                        <InputSelect id="Continent" @bind-Value="@obj.Continent" class="form-control">
+                            <option value="" selected>Select Continent</option>
+                            @foreach (var c in contList!)
+                            {
+                                <option value="@c.ContinentCode">@c.ContinentName</option>
+                            }
+                        </InputSelect>
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <label for="MinMiles" class="form-control">
+                        Minimum Miles
+                        <InputNumber id="MinMiles" class="form-control" @bind-Value="@obj.MinMiles" />
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <label for="MaxMiles" class="form-control">
+                        Maximum Miles
+                        <InputNumber id="MaxMiles" class="form-control" @bind-Value="@obj.MaxMiles" />
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="btn-right">
+                    <br />
+                    <input type="button" class="btn btn-primary" @onclick="@GenerateNewFlight" value="Generate Flight" />
+                </div>
+            </div>
+        </EditForm>
+    </div>
+    <div style="width:100%;">
+        @if (flightList != null)
+        {
+            @foreach (var f in flightList)
+            {
+                <FluentGrid Spacing="3" Justify="JustifyContent.SpaceEvenly" Style="width:100%;">
+                    <FluentGridItem xs="4" md="8">
+                        <h4><FluentBadge Appearance="Appearance.Accent" Width="125px" Height="25px">@f.XplaneName:</FluentBadge> @f.DepartIdent to @f.DestIdent: @f.DistNMI NMI Time: @f.FlightTime</h4>
+                    </FluentGridItem>
+                    <FluentGridItem xs="4" md="4">
+                        <FluentButton Appearance="Appearance.Stealth" IconStart="@(new Icons.Regular.Size24.Save())" OnClick="SaveFlight">Save</FluentButton>
+                    </FluentGridItem>
+                    <FluentGridItem xs="6" md="6">
+                        <FluentCard>
+                            <div class="card-header">
+                                <h5 class="card-title">Departure Airport</h5>
+                            </div>
+                            <div class="card-body">
+                                <p><b>Ident:</b> @f.DepartIdent</p>
+                                <p><b>Airport:</b> @f.DepartName</p>
+                                <p><b>Airport Type:</b> @f.DepartType</p>
+                                <p><b>City:</b> @f.DepartCity</p>
+                                <p><b>Region:</b> @f.DepartRegion</p>
+                                <p><b>Country:</b> @f.DepartCountry</p>
+                                <p><b>Elevation:</b> @f.DepartElevation</p>
+                            </div>
+                        </FluentCard>
+                    </FluentGridItem>
+                    <FluentGridItem xs="6" md="6">
+                        <FluentCard>
+                            <div class="card-header">
+                                <h5 class="card-title">Arrival Airport</h5>
+                            </div>
+                            <div class="card-body">
+                                <p><b>Ident:</b> @f.DestIdent</p>
+                                <p><b>Airport:</b> @f.DestName</p>
+                                <p><b>Airport Type:</b> @f.DestType</p>
+                                <p><b>City:</b> @f.DestCity</p>
+                                <p><b>Region:</b> @f.DestRegion</p>
+                                <p><b>Country:</b> @f.DestCountry</p>
+                                <p><b>Elevation:</b> @f.DestElevation</p>
+                            </div>
+                        </FluentCard>
+                    </FluentGridItem>
+                </FluentGrid>
+            }
+        }
+    </div>
+</FluentStack>
+

@@ -1,18 +1,19 @@
-﻿<Window x:Class="AeroSimFT.MainWindow"
+﻿<Window x:Class="AeroSimFT.Views.AirportWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:blazor="clr-namespace:Microsoft.AspNetCore.Components.WebView.Wpf;assembly=Microsoft.AspNetCore.Components.WebView.Wpf"
-        xmlns:local="clr-namespace:AeroSimFT"
+        xmlns:componentsNamespace="clr-namespace:AeroSimFT.Pages.Airports"
+        xmlns:local="clr-namespace:AeroSimFT.Pages.Airports"
         mc:Ignorable="d"
-        Title="AeroSim Flight Tracker" WindowState="Normal" WindowStyle="ToolWindow" Height="1100" Width="1550" d:DesignHeight="950" d:DesignWidth="1550">
+        Title="Airports" Height="900" Width="1400">
     <DockPanel>
         <StatusBar DockPanel.Dock="Bottom"></StatusBar>
         <Grid>
-            <blazor:BlazorWebView HostPage="wwwroot\index.html" Services="{DynamicResource services}">
+            <blazor:BlazorWebView HostPage="wwwroot\index.html" Services="{DynamicResource services}" StartPath="/Airports">
                 <blazor:BlazorWebView.RootComponents>
-                    <blazor:RootComponent Selector="#app" ComponentType="{x:Type local:MainWindowRouter}" />
+                    <blazor:RootComponent Selector="#app" ComponentType="{x:Type local:AirportWindowRouter}" />
                 </blazor:BlazorWebView.RootComponents>
             </blazor:BlazorWebView>
         </Grid>

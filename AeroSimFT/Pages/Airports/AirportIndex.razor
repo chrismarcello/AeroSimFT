@@ -1,0 +1,50 @@
+﻿@page "/airports"
+@using LeafletForBlazor
+@inject NavigationManager navigationManager
+
+<FluentStack Orientation="Orientation.Vertical" VerticalGap="40" HorizontalAlignment="HorizontalAlignment.Left" VerticalAlignment="VerticalAlignment.Top" Width="98%" Style="margin:15px;">
+    <div>
+
+        <FluentGrid Spacing="4" Justify="JustifyContent.Center">
+            <FluentGridItem xs="6" md="12">
+                <FluentSearch @bind-Value="searchTerm" Appearance="FluentInputAppearance.Filled" Placeholder="Search Airports..." @oninput="OnSearchInput" @bind-Value:after="HandleClear" Style="width: 400px;" />
+
+            </FluentGridItem>
+        </FluentGrid>
+    </div>
+    <div>
+        @if (searchResults is not null && searchTerm is not null)
+        {
+            <h3>Searching for: @searchTerm</h3>
+            <div style="height: 400px; width: max-content; overflow-y: scroll;">
+                <FluentDataGrid @ref="resultGrid" Items=@searchResults Virtualize="true" DisplayMode="DataGridDisplayMode.Table" Style="width: 1000px" ItemSize="54" GenerateHeader="GenerateHeaderOption.Sticky">
+                    <ChildContent>
+                        <PropertyColumn Property="@(p => p.Ident)" Title="ICAO" Sortable="true" Tooltip="true" />
+                        <PropertyColumn Property="@(p => p.AirportName)" Title="Name" Sortable="true" Tooltip="true" />
+                        <PropertyColumn Property="@(p => p.Municipality)" Title="City" Sortable="true" Tooltip="true" />
+                        <PropertyColumn Property="@(p => p.Region.RegionName)" Title="Region" Sortable="true" Tooltip="true" />
+                        <PropertyColumn Property="@(p => p.Country.Name)" Title="Country" Sortable="true" Tooltip="true" />
+                        <PropertyColumn Property="@(p => p.Type.AirportTypeTitle)" Title="Airport Type" Sortable="true" Tooltip="true" />
+                        <TemplateColumn>
+                            <FluentButton IconEnd="@(new Icons.Regular.Size16.Globe())"
+                                          Title="View Quick Map" />
+                            <FluentButton IconEnd="@(new Icons.Regular.Size16.ContentView())" Title="View Airport Details" @onclick="@(() => GoToDetails(context))" />
+                        </TemplateColumn>
+                    </ChildContent>
+                    <EmptyContent>
+                        <FluentIcon Value="@(new Icons.Filled.Size24.Crown())" Color="@Color.Accent" />&nbsp; Nothing to see here. Carry on!
+                    </EmptyContent>
+                    <LoadingContent>
+                        <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center">
+                            Loading...<br />
+                            <FluentProgress Width="240px" />
+                        </FluentStack>
+                    </LoadingContent>
+                </FluentDataGrid>
+            </div>
+        }
+    </div>
+
+
+</FluentStack>
+
