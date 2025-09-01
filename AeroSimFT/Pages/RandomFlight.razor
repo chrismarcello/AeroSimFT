@@ -1,75 +1,61 @@
 ﻿@page "/randomflight"
 @inject NavigationManager navigationManager
 
-<h3>RandomFlight</h3>
-<FluentStack Orientation="Orientation.Vertical" Style="width:100%;">
+
+<FluentStack Orientation="Orientation.Vertical" VerticalAlignment="VerticalAlignment.Top" HorizontalAlignment="HorizontalAlignment.Left" Style="width:95%;">
 
     <div style="width:100%;">
+        <h3>Generate Random Flight</h3>
         <EditForm Model="@obj" OnValidSubmit="@GenerateNewFlight">
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="XpId" class="form-control">
-                        Aircraft
-                        <InputSelect id="XpId" @bind-Value="@obj.XpId" class="form-control">
-                            <option value="1" selected>Select Aircraft</option>
-                            @foreach (var a in xpList!)
-                            {
-                                <option value="@a.AcId">@a.XPName</option>
-                            }
-                        </InputSelect>
-                    </label>
-                </div>
-                <div class="col-md-4">
-                    <label for="AirportType" class="form-control">
-                        Airport Type
-                        <InputSelect id="AirportType" @bind-Value="@obj.AirportType" class="form-control">
-                            <option value="0" selected>Select Airport Type</option>
-                            @foreach (var t in airportTypeList!)
-                            {
-                                <option value="@t.TypeId">@t.AirportTypeName</option>
-                            }
-                        </InputSelect>
-                    </label>
-                </div>
-                <div class="col-md-4">
-                    <label for="DepartIdent" class="form-control">
-                        Departure Airport Ident
-                        <InputText id="DepartIdent" class="form-control" @bind-Value="@obj.DepartIdent" />
-                    </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="Continent" class="form-control">
-                        Continent
-                        <InputSelect id="Continent" @bind-Value="@obj.Continent" class="form-control">
-                            <option value="" selected>Select Continent</option>
-                            @foreach (var c in contList!)
-                            {
-                                <option value="@c.ContinentCode">@c.ContinentName</option>
-                            }
-                        </InputSelect>
-                    </label>
-                </div>
-                <div class="col-md-4">
-                    <label for="MinMiles" class="form-control">
+            <FluentGrid Spacing="4" AdaptiveRendering="true" Justify="JustifyContent.FlexStart" Style="background-color: var(--neutral-layer-3); padding: 4px; overflow:hidden; ">
+                <FluentGridItem xs="3" md="4">
+                    Aircraft
+                    <InputSelect id="XpId" @bind-Value="@obj.XpId" class="form-control">
+                        <option value="1" selected>Select Aircraft</option>
+                        @foreach (var a in xpList!)
+                        {
+                            <option value="@a.AcId">@a.XPName</option>
+                        }
+                    </InputSelect>
+                </FluentGridItem>
+                <FluentGridItem xs="3" md="4">
+                    Airport Type
+                    <InputSelect id="AirportType" @bind-Value="@obj.AirportType" class="form-control">
+                        <option value="0" selected>Select Airport Type</option>
+                        @foreach (var t in airportTypeList!)
+                        {
+                            <option value="@t.TypeId">@t.AirportTypeName</option>
+                        }
+                    </InputSelect>
+                </FluentGridItem>
+                <FluentGridItem xs="3" md="4">
+                    Departure Airport Ident
+                    <InputText id="DepartIdent" class="form-control" @bind-Value="@obj.DepartIdent" />
+                </FluentGridItem>
+                <FluentGridItem xs="3" md="4">
+                    Continent
+                    <InputSelect id="Continent" @bind-Value="@obj.Continent" class="form-control">
+                        <option value="" selected>Select Continent</option>
+                        @foreach (var c in contList!)
+                        {
+                            <option value="@c.ContinentCode">@c.ContinentName</option>
+                        }
+                    </InputSelect>
+                    </FluentGridItem>
+                    <FluentGridItem xs="3" md="4">
                         Minimum Miles
-                        <InputNumber id="MinMiles" class="form-control" @bind-Value="@obj.MinMiles" />
-                    </label>
-                </div>
-                <div class="col-md-4">
-                    <label for="MaxMiles" class="form-control">
-                        Maximum Miles
-                        <InputNumber id="MaxMiles" class="form-control" @bind-Value="@obj.MaxMiles" />
-                    </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="btn-right">
-                    <br />
-                    <input type="button" class="btn btn-primary" @onclick="@GenerateNewFlight" value="Generate Flight" />
-                </div>
-            </div>
+                    <InputNumber id="MinMiles" class="form-control" @bind-Value="@obj.MinMiles" />
+                    </FluentGridItem>
+                    <FluentGridItem xs="3" md="4">
+                    Maximum Miles
+                    <InputNumber id="MaxMiles" class="form-control" @bind-Value="@obj.MaxMiles" />
+                    </FluentGridItem>
+                    <FluentGridItem xs="12" md="12" Justify="JustifyContent.FlexEnd">
+                        <FluentButton Appearance="Appearance.Accent" OnClick="@GenerateNewFlight">Generate Flight</FluentButton>
+                    
+                    </FluentGridItem>
+            </FluentGrid>
+           
         </EditForm>
     </div>
     <div style="width:100%;">
