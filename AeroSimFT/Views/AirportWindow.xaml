@@ -7,7 +7,7 @@
         xmlns:componentsNamespace="clr-namespace:AeroSimFT.Pages.Airports"
         xmlns:local="clr-namespace:AeroSimFT.Pages.Airports"
         mc:Ignorable="d"
-        Title="AeroSim Flight Tracker: Airports" Height="900" Width="1400">
+        Title="AeroSim Flight Tracker: Airports" Height="900" Width="1400" WindowState="Normal" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <StatusBar DockPanel.Dock="Bottom"></StatusBar>
         <Grid>

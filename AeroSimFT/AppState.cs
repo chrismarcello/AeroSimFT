@@ -1,4 +1,5 @@
 ﻿using AeroSimFT.Pages;
+using AeroSimFT.Pages.Aircrafts;
 using AeroSimFT.Pages.Airports;
 using AeroSimFT.Views;
 
@@ -13,6 +14,8 @@ namespace AeroSimFT
         public static AirportWindow? AirportWindow { get; set; }
         public static AirportIndex? AirportIndex { get; set; }
         public static AirportDetails? AirportDetails { get; set; }
+        public static AircraftWindow? AircraftWindow { get; set; }
+        public static AircraftIndex? AircraftIndex { get; set; }
 
     }
 }

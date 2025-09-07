@@ -11,9 +11,12 @@ namespace AeroSimFT
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
+
             var serviceCollection = new ServiceCollection();
+
             serviceCollection.AddWpfBlazorWebView();
             serviceCollection.AddFluentUIComponents();
             serviceCollection.AddSingleton<XplaneServices>();
@@ -24,6 +27,7 @@ namespace AeroSimFT
             InitializeComponent();
 
             AppState.MainWindow = this;
+            
         }
         public void CloseApp_Btn()
         {
@@ -56,6 +60,19 @@ namespace AeroSimFT
             else
             {
                 AppState.AirportWindow.Activate();
+            }
+        }
+        internal void OpenAircraftWindow_Click()
+        {
+            if (AppState.AircraftWindow == null)
+            {
+                AppState.AircraftWindow = new AircraftWindow();
+                AppState.AircraftWindow.Show();
+                AppState.AircraftWindow.Closed += (s, args) => AppState.AircraftWindow = null!;
+            }
+            else
+            {
+                AppState.AircraftWindow.Activate();
             }
         }
     }

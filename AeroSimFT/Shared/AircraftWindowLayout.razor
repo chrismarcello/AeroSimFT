@@ -1,10 +1,8 @@
 ﻿@inherits LayoutComponentBase
 
-<FluentDesignTheme StorageName="theme" />
-
 <FluentLayout>
     <FluentHeader>
-        AeroSim Flight Tracker
+        AeroSim Flight Tracker: Aircrafts
         <FluentSpacer />
         @* Aligned to the end *@
         <FluentButton IconEnd="@(new Icons.Regular.Size24.Subtract())" Title="Minimize" Appearance="Appearance.Accent" OnClick="MinimizeApp" />
@@ -13,11 +11,7 @@
     </FluentHeader>
     <FluentStack Orientation="Orientation.Horizontal" Width="100%">
         <FluentNavMenu Width="250" Expanded="true" Collapsible="true">
-            <FluentNavLink Icon="@(new Icons.Regular.Size24.Home())" Href="/" Match="NavLinkMatch.All">Home</FluentNavLink>
-            <FluentNavLink Icon="@(new Icons.Regular.Size24.AirplaneLanding())" Href="/flownflights">Flights Flown</FluentNavLink>
-            <FluentNavLink Icon="@(new Icons.Regular.Size24.AirplaneTakeOff())" Href="/randomflight">Generate Random Flight</FluentNavLink>
-            <FluentNavLink Icon="@(new Icons.Regular.Size24.BuildingLighthouse())" OnClick="AirportWindowOpen">Airports</FluentNavLink>
-            <FluentNavLink Icon="@(new Icons.Regular.Size24.Airplane())" OnClick="AircaftWindowOpen">Aircraft</FluentNavLink>
+            <FluentNavLink Icon="@(new Icons.Regular.Size24.Airplane())" Href="/aircrafts" Match="NavLinkMatch.All">Home</FluentNavLink>
             <img src="./Images/aerosim_logo_white.png" alt="AeroSim Logo" style="width:250px; margin-top:20px;">
         </FluentNavMenu>
         <FluentBodyContent>
@@ -30,14 +24,13 @@
 <FluentTooltipProvider />
 <FluentMessageBarProvider />
 <FluentMenuProvider />
+
 @code {
-    protected void CloseApp() => AppState.MainWindow?.CloseApp_Btn();
-    protected void MinimizeApp() => AppState.MainWindow?.MinimizeButton_Click();
+    protected void CloseApp() => AppState.AircraftWindow?.CloseApp_Btn();
+    protected void MinimizeApp() => AppState.AircraftWindow?.MinimizeButton_Click();
     protected void MaximizeApp()
     {
-        AppState.MainWindow?.MaximizeButton_Click();
+        AppState.AircraftWindow?.MaximizeButton_Click();
         StateHasChanged();
     }
-    protected void AirportWindowOpen() => AppState.MainWindow?.OpenAirportWindow_Click();
-    protected void AircaftWindowOpen() => AppState.MainWindow?.OpenAircraftWindow_Click();
 }

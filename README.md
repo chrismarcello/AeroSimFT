@@ -9,5 +9,5 @@ This is very much a work in progress.
 - [ ] Create Airport Edit Page and Functions
 - [ ] Configure Leaflet Map for larger area
 - [ ] Add maps to flights.
-- [ ] Aircraft View
+- [x] Aircraft View
 - [ ] Create Add X-Plane Aircraft interface
