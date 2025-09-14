@@ -1,6 +1,24 @@
 ﻿@page "/aircrafts"
-<h3>Aircraft</h3>
+@inject NavigationManager navigationManager
+<h3>My XP Aircraft</h3>
 
-@code {
-
-}
+<FluentStack Orientation="Orientation.Vertical" VerticalAlignment="VerticalAlignment.Top" HorizontalAlignment="HorizontalAlignment.Left" Style="margin: 15px;">
+    <div style="width:98%">
+        @if (items is not null)
+        {
+            <FluentDataGrid @ref="grid" Items="@items" AutoFit="true" MultiLine="true" TGridItem="XpAircraft" Pagination="pagination">
+                <PropertyColumn Property="@(p => p.AcName)" Title="Aircraft Name" Sortable="true" Tooltip="true" />
+                <PropertyColumn Property="@(p => p.AcType)" Title="Aircraft Type" Sortable="true" Tooltip="true" />
+                <PropertyColumn Property="@(p => p.ServiceCeiling)" Title="Ceiling" Sortable="true" Tooltip="true" />
+                <PropertyColumn Property="@(p => p.ServiceRange)" Title="Range" Sortable="true" Tooltip="true" />
+                <PropertyColumn Property="@(p => p.LongRangeCruise)" Title="LR Cruise" Sortable="true" Tooltip="true" />
+                <PropertyColumn Property="@(p => p.MinLandingDist)" Title="Min Landing Dist" Sortable="true" Tooltip="true" />
+                    <TemplateColumn Align="Align.End">
+                        <FluentButton aria-label="Edit item" IconEnd="@(new Icons.Regular.Size16.Edit())" @onclick="() => GoToEdit(context)" />
+                        <FluentButton aria-label="Delete item" IconEnd="@(new Icons.Regular.Size16.Delete())" />
+                    </TemplateColumn>
+            </FluentDataGrid>
+            <FluentPaginator State="@pagination" />
+        }
+    </div>
+</FluentStack>

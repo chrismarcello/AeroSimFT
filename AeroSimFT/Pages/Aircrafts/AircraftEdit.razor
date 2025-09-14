@@ -1,0 +1,26 @@
+﻿@page "/aircraftedit/{Id:int}"
+@inject NavigationManager navigationManager
+<FluentStack Orientation="Orientation.Vertical" VerticalGap="20" HorizontalAlignment="HorizontalAlignment.Left" VerticalAlignment="VerticalAlignment.Top" Style="margin:15px;">
+<div style="width:100%;">
+        <FluentTabs OnTabChange="HandleOnTabChange" ActiveTabId="Tab1" Size="TabSize.Large">
+            <FluentTab Id="Tab1" Label="Edit Aircraft">
+                <h3>Edit: @TheAircraftName</h3>
+                <EditForm Model="aircraftDetails" OnSubmit="Submit">
+                    <FluentGrid Justify="JustifyContent.SpaceBetween" Spacing="4" Style="overflow:hidden; width:100%; height:fit-content;">
+                        <FluentGridItem sm="6">
+                            <FluentTextField @bind-Value="aircraftDetails!.AcName" Label="Aircraft Name" Placeholder="Enter Aircraft Name" Required="true" />"
+                        </FluentGridItem>
+                        <FluentGridItem sm="6">
+                            <FluentTextField @bind-Value="aircraftDetails!.AcType" Label="Aircraft Type" Placeholder="Enter Aircraft Type" Required="true" />"
+                        </FluentGridItem>
+                    </FluentGrid>
+                </EditForm>
+            </FluentTab>
+            <FluentTab Id="Tab2" Label="Aircraft Type Lookup">
+                <p>This will be aircraft type lookup</p>
+            </FluentTab>
+        </FluentTabs>
+
+</div>
+</FluentStack>
+

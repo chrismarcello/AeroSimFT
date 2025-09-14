@@ -8,11 +8,19 @@ namespace AeroSimFT.Pages.Aircrafts
 {
     public partial class AircraftIndex
     {
+        FluentDataGrid<XpAircraft>? grid;
+        PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
+        IQueryable<XpAircraft>? items;
         protected override async Task OnInitializedAsync()
         {
             AppState.AircraftIndex = this;
-            await Task.Delay(0);
+            
+            items = (await AircraftServices.GetXpAircraftsAsync()).AsQueryable();
 
+        }
+        private void GoToEdit(XpAircraft obj)
+        {
+            navigationManager.NavigateTo($"/aircraftedit/{obj.AcId}");
         }
     }
 }

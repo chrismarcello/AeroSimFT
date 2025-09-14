@@ -23,7 +23,7 @@ namespace AeroSimFT.Pages
         {
             AppState.RandomFlight = this;
             contList = await LocationServices.GetContinents();
-            xpList = await AircraftServices.GetXpAircraftAsync();
+            xpList = await AircraftServices.GetXpAircraftDropDownAsync();
             airportTypeList = await AirportServices.GetAirportTypeAsync();
         }
         protected async Task GenerateNewFlight()

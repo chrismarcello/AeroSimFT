@@ -16,6 +16,7 @@ namespace AeroSimFT
         public static AirportDetails? AirportDetails { get; set; }
         public static AircraftWindow? AircraftWindow { get; set; }
         public static AircraftIndex? AircraftIndex { get; set; }
+        public static AircraftEdit? AircraftEdit { get; set; }
 
     }
 }

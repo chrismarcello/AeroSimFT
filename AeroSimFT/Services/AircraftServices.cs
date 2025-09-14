@@ -12,7 +12,25 @@ namespace AeroSimFT.Services
 {
     public class AircraftServices
     {
-        public static async Task<List<AircraftOptions>> GetXpAircraftAsync()
+        public static async Task<List<XpAircraft>> GetXpAircraftsAsync()
+        {
+            
+            using var context = new FlightSimContext();
+            List<XpAircraft> aircraft = await context.XpAircrafts.ToListAsync();
+            
+
+            return aircraft;
+        }
+        public static async Task<XpAircraft?> GetXpAircraftByIdAsync(int acId)
+        {
+            using var context = new FlightSimContext();
+            XpAircraft? aircraft = await context.XpAircrafts
+                .Where(a => a.AcId == acId)
+                .FirstOrDefaultAsync();
+                
+            return aircraft;
+        }
+        public static async Task<List<AircraftOptions>> GetXpAircraftDropDownAsync()
         {
             List<AircraftOptions> af = new List<AircraftOptions>();
             using var context = new FlightSimContext();
