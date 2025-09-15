@@ -1,6 +1,7 @@
 ﻿using AeroSimFT.Data;
 using AeroSimFT.EFModels;
 using AeroSimFT.ViewModels;
+using AeroSimFT.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Diagnostics;
@@ -32,17 +33,33 @@ namespace AeroSimFT.Services
         public static async Task<List<Flights>> GetRandomFlight(RandomFlightForm obj)
         {
             using var context = new FlightSimContext();
+
             List<Flights> result = new List<Flights>();
 
-            //Flights t = new Flights();
-            //t.AirportType = obj.AirportType;
+            GeneratedFlight gf = await new FlightGenerator().BuildFlight(obj.XpId, obj.DepartIdent, obj.AirportType, obj.Continent, obj.MinMiles, obj.MaxMiles);
+            Flights t = new Flights();
+            t.XpId = gf.AircraftId;
+            t.XplaneName = gf.XplaneName;
+            t.DepartIdent = gf.DepartIdent;
+            t.DepartName = gf.DepartAirport;
+            t.DepartType = gf.DepartAirportTypeString;
+            t.DepartCity = gf.DepartCity;
+            t.DepartRegion = gf.DepartRegion;
+            t.DepartCountry = gf.DepartCountry;
+            t.DepartElevation = gf.DepartElevation;
+            t.DestIdent = gf.DestIdent;
+            t.DestName = gf.DestAirport;
+            t.DestType = gf.DestAirportTypeString;
+            t.DestCity = gf.DestCity;
+            t.DestRegion = gf.DestRegion;
+            t.DestCountry = gf.DestCountry;
+            t.DestElevation = gf.DestElevation;
+            t.DestType = gf.DestAirportTypeString;
+            t.DistNMI = gf.DistanceNm;
+            t.FlightTime = gf.EstFlightTime;
+            result.Add(t);
 
-
-            result = await context.Set<Flights>().FromSqlInterpolated($"CALL getRandomFlight({Convert.ToInt32(obj.XpId)}, {Convert.ToInt32(obj.MinMiles)}, {Convert.ToInt32(obj.MaxMiles)}, {Convert.ToString(obj.Continent)}, {Convert.ToString(obj.DepartIdent)}, {Convert.ToInt32(obj.AirportType)});").ToListAsync<Flights>();
-
-
-
-            return result;
+            return result!;
         }
         public static async Task<IEnumerable<SavedFlights>> SavedFlightsAsync()
         {
