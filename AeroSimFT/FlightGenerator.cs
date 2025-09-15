@@ -45,7 +45,15 @@ namespace AeroSimFT
             if (minMiles != 0)
                 randParams.MinDistance = minMiles;
             if (maxMiles != 0)
+            {
                 randParams.MaxDistance = maxMiles;
+            }
+                
+            else
+            {
+                randParams.MaxDistance = (Int32)(randParams.MaxRange);
+            }
+                
             // Set the departure airport parameters
             if (String.IsNullOrEmpty(apIdent))
             {
