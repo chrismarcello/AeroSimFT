@@ -1,0 +1,47 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace AeroSimFT.EFModels;
+
+public partial class Navaid
+{
+    public int NavaidId { get; set; }
+
+    public string? Filename { get; set; }
+
+    public string? Ident { get; set; }
+
+    public string? NavaidName { get; set; }
+
+    public string? NavaidType { get; set; }
+
+    public int? FrequencyKhz { get; set; }
+
+    public double? LatitudeDeg { get; set; }
+
+    public double? LongitudeDeg { get; set; }
+
+    public string? ElevationFt { get; set; }
+
+    public string? IsoCountry { get; set; }
+
+    public string? DmeFrequencyKhz { get; set; }
+
+    public string? DmeChannel { get; set; }
+
+    public string? DmeLatitudeDeg { get; set; }
+
+    public string? DmeLongitudeDeg { get; set; }
+
+    public string? DmeElevationFt { get; set; }
+
+    public string? SlavedVariationDeg { get; set; }
+
+    public double? MagneticVariationDeg { get; set; }
+
+    public string? UsageType { get; set; }
+
+    public string? Power { get; set; }
+
+    public string? AssociatedAirport { get; set; }
+}

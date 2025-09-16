@@ -16,14 +16,14 @@ namespace AeroSimFT.ViewModels
         private string _arrivalAirport;
         private string _arrivalAirportArea;
         private Int32 _distance;
-        private string _estFlightTime;
+        private TimeSpan _estFlightTime;
         private bool _crashed;
         private DateTime? _dateFlown;
         private bool _selected = false;
 
         public FlightsFlown() { }
 
-        public FlightsFlown(int flightId, DateTime dateCreate, string aircraftName, string departAirport, string departAirportArea, string arrivalAirport, string arrivalAirportArea, int distance, string estFlightTime, DateTime? dateFlown, bool crashed, bool selected)
+        public FlightsFlown(int flightId, DateTime dateCreate, string aircraftName, string departAirport, string departAirportArea, string arrivalAirport, string arrivalAirportArea, int distance, TimeSpan estFlightTime, DateTime? dateFlown, bool crashed, bool selected)
         {
             FlightId = flightId;
             DateCreate = dateCreate;
@@ -79,7 +79,7 @@ namespace AeroSimFT.ViewModels
             get { return _distance; }
             set { _distance = value; }
         }
-        public string EstFlightTime
+        public TimeSpan EstFlightTime
         {
             get { return _estFlightTime; }
             set { _estFlightTime = value; }

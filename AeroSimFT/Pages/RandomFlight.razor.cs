@@ -48,7 +48,8 @@ namespace AeroSimFT.Pages
                 objSave.DestRegion = i.DestRegion;
                 objSave.DestCountry = i.DestCountry;
                 objSave.DistanceNm = i.DistNMI;
-                objSave.EstFlightTime = i.FlightTime;
+                TimeSpan timeSpan = TimeSpan.Parse(i.FlightTime!.ToString()!);
+                objSave.EstFlightTime = timeSpan;
                 objSave.DateCreated = DateTime.Now;
             }
             bool result = await XplaneServices.SaveFlightPlanAsync(objSave);

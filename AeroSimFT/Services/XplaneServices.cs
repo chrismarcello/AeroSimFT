@@ -82,7 +82,8 @@ namespace AeroSimFT.Services
                 string citycounty2 = d.DestCity + ", " + d.DestRegion + ", " + d.DestCountry;
                 savedFlights.ArrivalAirportArea = citycounty2;
                 savedFlights.Distance = Convert.ToInt32(d.DistanceNm);
-                savedFlights.EstFlightTime = d.EstFlightTime!;
+                TimeSpan timeSpan = TimeSpan.Parse(d.EstFlightTime!.ToString()!);
+                savedFlights.EstFlightTime = timeSpan!;
                 savedFlights.Selected = false;
                 row++;
                 list.Add(savedFlights);
@@ -184,7 +185,8 @@ namespace AeroSimFT.Services
                 string citycounty2 = p.DestCity + ", " + p.DestRegion + ", " + p.DestCountry;
                 ff.ArrivalAirportArea = citycounty2;
                 ff.Distance = Convert.ToInt32(p.DistanceNm);
-                ff.EstFlightTime = p.EstFlightTime;
+                TimeSpan timeSpan = TimeSpan.Parse(p.EstFlightTime!.ToString()!);
+                ff.EstFlightTime = timeSpan;
                 ff.Crashed = p.PlaneCrash;
                 ff.DateFlown = p.DateFlown;
                 flownFlights.Add(ff);
