@@ -1,5 +1,6 @@
 ﻿@page "/airportdetails/{Id:int}"
 
+
 <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="40" HorizontalAlignment="HorizontalAlignment.Left" VerticalAlignment="VerticalAlignment.Top" Width="98%">
     <div style="width:48%;">
 
@@ -16,12 +17,34 @@
                             <p><strong>Coordinates:</strong> Lat: @detail.LatitudeDeg, Lon: @detail.LongitudeDeg</p>
                             <p><strong>Elevation:</strong> @detail.ElevationFt ft</p>
                             <p><strong>Scheduled Services:</strong> @detail.ScheduledService</p>
-                            <p><strong>Runways:</strong></p>
+                           
 
                         </div>
                         <hr />
                     }
 
+                </FluentStack>
+            </FluentCard>
+            <FluentCard>
+                <FluentStack Orientation="Orientation.Vertical" VerticalGap="10" Padding="10">
+                    <h3>Runway Details</h3>
+                    @foreach (var detail in airportDetails)
+                    {
+                        <div>
+                            @foreach (var runway in detail.Runways)
+                            {
+                                <div style="margin-bottom: 15px;">
+                                    <h4>Runway @runway.LeIdent / @runway.HeIdent</h4>
+                                    <p><strong>Length:</strong> @runway.LengthFt ft</p>
+                                    <p><strong>Width:</strong> @runway.WidthFt ft</p>
+                                    <p><strong>Surface:</strong> @runway.Surface</p>
+                                    <p><strong>Lighted:</strong> @(runway.Lighted == 1 ? "Yes" : "No")</p>
+                                    <p><strong>Closed:</strong> @(runway.Closed == 1 ? "Yes" : "No")</p>
+                                    
+                                </div>
+                            }
+                        </div>
+                    }
                 </FluentStack>
             </FluentCard>
         }
@@ -34,8 +57,15 @@
 
         @if (airportDetails is not null)
         {
+            <div class="map-wrapper">
+                <Map @ref="mapRef" MapOptions="@mapOptions"></Map>
+            </div>
 
-            <RealTimeMap @ref="realTimeMap" OnAfterMapLoaded="AddMarker" height="calc(100vh - 6rem)" width="calc(100vw - 18rem)"></RealTimeMap>
+<style>
+    #mapId {
+        height: 400px;
+    }
+</style>
         }
         else
         {
@@ -43,3 +73,4 @@
         }
     </div>
 </FluentStack>
+

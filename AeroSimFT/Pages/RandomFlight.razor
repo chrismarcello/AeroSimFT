@@ -4,11 +4,11 @@
 
 <FluentStack Orientation="Orientation.Vertical" VerticalAlignment="VerticalAlignment.Top" HorizontalAlignment="HorizontalAlignment.Left" Style="width:95%;">
 
-    <div style="width:100%;">
+    <div style="width:100%; overflow:hidden;">
         <h3>Generate Random Flight</h3>
         <EditForm Model="@obj" OnValidSubmit="@GenerateNewFlight">
             <FluentGrid Spacing="4" AdaptiveRendering="true" Justify="JustifyContent.FlexStart" Style="background-color: var(--neutral-layer-3); padding: 4px; overflow:hidden; ">
-                <FluentGridItem xs="3" md="4">
+                <FluentGridItem xs="3" md="4" Style="margin-top:10px;">
                     Aircraft
                     <InputSelect id="XpId" @bind-Value="@obj.XpId" class="form-control">
                         <option value="1" selected>Select Aircraft</option>
@@ -18,7 +18,7 @@
                         }
                     </InputSelect>
                 </FluentGridItem>
-                <FluentGridItem xs="3" md="4">
+                <FluentGridItem xs="3" md="4" Style="margin-top:10px;">
                     Airport Type
                     <InputSelect id="AirportType" @bind-Value="@obj.AirportType" class="form-control">
                         <option value="0" selected>Select Airport Type</option>
@@ -28,11 +28,11 @@
                         }
                     </InputSelect>
                 </FluentGridItem>
-                <FluentGridItem xs="3" md="4">
+                <FluentGridItem xs="3" md="4" Style="margin-top:10px;">
                     Departure Airport Ident
                     <InputText id="DepartIdent" class="form-control" @bind-Value="@obj.DepartIdent" />
                 </FluentGridItem>
-                <FluentGridItem xs="3" md="4">
+                <FluentGridItem xs="3" md="4" Style="margin-top:10px;">
                     Continent
                     <InputSelect id="Continent" @bind-Value="@obj.Continent" class="form-control">
                         <option value="" selected>Select Continent</option>
@@ -41,19 +41,19 @@
                             <option value="@c.ContinentCode">@c.ContinentName</option>
                         }
                     </InputSelect>
-                    </FluentGridItem>
-                    <FluentGridItem xs="3" md="4">
+                </FluentGridItem>
+                <FluentGridItem xs="3" md="4" Style="margin-top:10px;">
                         Minimum Miles
                     <InputNumber id="MinMiles" class="form-control" @bind-Value="@obj.MinMiles" />
-                    </FluentGridItem>
-                    <FluentGridItem xs="3" md="4">
+                </FluentGridItem>
+                <FluentGridItem xs="3" md="4" Style="margin-top:10px;">
                     Maximum Miles
                     <InputNumber id="MaxMiles" class="form-control" @bind-Value="@obj.MaxMiles" />
-                    </FluentGridItem>
-                    <FluentGridItem xs="12" md="12" Justify="JustifyContent.FlexEnd">
+                </FluentGridItem>
+                <FluentGridItem xs="12" md="12" Justify="JustifyContent.FlexEnd" Style="margin-top:10px;">
                         <FluentButton Appearance="Appearance.Accent" OnClick="@GenerateNewFlight">Generate Flight</FluentButton>
                     
-                    </FluentGridItem>
+                </FluentGridItem>
             </FluentGrid>
            
         </EditForm>

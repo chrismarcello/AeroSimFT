@@ -1,5 +1,6 @@
 ﻿using AeroSimFT.Services;
 using AeroSimFT.Views;
+using FisSst.BlazorMaps.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.FluentUI.AspNetCore.Components;
 using System.Windows;
@@ -19,6 +20,7 @@ namespace AeroSimFT
 
             serviceCollection.AddWpfBlazorWebView();
             serviceCollection.AddFluentUIComponents();
+            serviceCollection.AddBlazorLeafletMaps();
             serviceCollection.AddSingleton<XplaneServices>();
             serviceCollection.AddSingleton<LocationServices>();
             serviceCollection.AddSingleton<AirportServices>();

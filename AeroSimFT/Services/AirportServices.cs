@@ -35,7 +35,7 @@ namespace AeroSimFT.Services
             using var context = new FlightSimContext();
 
             List<Airport> ap = await context.Airports.OrderBy(a => a.AirportName)
-                                                     .Where(a => a.AirportName != null && a.AirportName.Contains(search) || a.Ident!.Contains(search))
+                                                     .Where(a => a.AirportName != null && a.AirportName.ToLower().Contains(search) || a.Ident!.ToLower().Contains(search))
                                                      .Include(r => r.Region)
                                                      .Include(c => c.Country)
                                                      .Include(t => t.Type)
@@ -48,6 +48,7 @@ namespace AeroSimFT.Services
 
             List<Airport> ap = await context.Airports.OrderBy(a => a.AirportName)
                                                      .Where(a => a.AirportId.Equals(Id))
+                                                     .Include(rr => rr.Runways)
                                                      .Include(r => r.Region)
                                                      .Include(c => c.Country)
                                                      .Include(t => t.Type)
